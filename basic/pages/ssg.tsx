@@ -4,14 +4,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 
+export async function getStaticProps() {
+  console.log("server");
+  return {
+    props: { time: new Date().toISOString() },
+  };
+}
 
-export default function Csr() {
-  const [time, setTime] = useState<string>("")
+interface Iprops {
+  time: string;
+}
 
-  useEffect(() => {
-    setTime(new Date().toISOString())
-  },[])
-
+export default function Ssg({time} : Iprops) {
   return (
     <div className={styles.container}>
       <Head>
@@ -21,9 +25,6 @@ export default function Csr() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>{time}</h1>
-        <Link href="/csr">
-            Csr로
-        </Link>
       </main>
       <footer className={styles.footer}>
         <a

@@ -27,6 +27,9 @@ export default function Home({ time }: Iprops) {
         <Link href="/csr">
             Csr로
         </Link>
+        <Link href="/ssg">
+            ssg로
+        </Link>
       </main>
       <footer className={styles.footer}>
         <a

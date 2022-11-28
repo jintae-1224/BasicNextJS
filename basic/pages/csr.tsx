@@ -1,20 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 
-export async function getServerSideProps() {
-  console.log("server");
-  return {
-    props: { time: new Date().toISOString() },
-  };
-}
 
-interface Iprops {
-  time: string;
-}
+export default function csr() {
+  const [time, setTime] = useState<string>("")
 
-export default function Home({ time }: Iprops) {
+  useEffect(() => {
+    setTime(new Date().toISOString())
+  },[])
+
   return (
     <div className={styles.container}>
       <Head>

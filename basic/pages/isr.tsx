@@ -1,12 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   console.log("server");
   return {
     props: { time: new Date().toISOString() },
+    //revalidate만큼 주기로 데이터를 새롭게 fatching
+    revalidate: 1,
   };
 }
 
@@ -14,7 +17,7 @@ interface Iprops {
   time: string;
 }
 
-export default function Home({ time }: Iprops) {
+export default function Isr({time} : Iprops) {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,15 +27,6 @@ export default function Home({ time }: Iprops) {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>{time}</h1>
-        <Link href="/csr">
-            Csr로
-        </Link>
-        <Link href="/ssg">
-            ssg로
-        </Link>
-        <Link href="/isr">
-            isr로
-        </Link>
       </main>
       <footer className={styles.footer}>
         <a

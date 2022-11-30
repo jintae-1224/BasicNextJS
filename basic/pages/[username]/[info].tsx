@@ -1,11 +1,15 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import SubLayout from '../../components/SubLayout'
 
 export default function UserNameInfo() {
+  const router = useRouter()
+  const { username, info } = router.query
   return (
     <div>
-      <h1>UserNameInfo</h1>
+      <h1>UserName : {username}</h1>
+      <h1>info : {info}</h1>
     </div>
   )
 }

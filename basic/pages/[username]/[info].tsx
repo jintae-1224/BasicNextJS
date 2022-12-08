@@ -5,16 +5,26 @@ import SubLayout from '../../components/SubLayout'
 
 export default function UserNameInfo() {
   const router = useRouter()
-  const { username, info } = router.query
+  const { uid, username, info } = router.query
   const [name, setName] = useState<string>('')
 
+  // useEffect(() => {
+  //   fetch('/api/user')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setName(data.name)
+  //     })
+  // }, [])
+
   useEffect(() => {
-    fetch('/api/user')
-      .then((res) => res.json())
-      .then((data) => {
-        setName(data.name)
-      })
-  }, [])
+    if (uid !== null) {
+      fetch(`/api/user-info/${uid}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setName(data.name)
+        })
+    }
+  }, [uid])
 
   return (
     <div>
